@@ -4,7 +4,7 @@ date_default_timezone_set('America/Sao_Paulo');
 // Conexão com o banco de dados
 $dsn = 'mysql:host=localhost;dbname=estacionamento;charset=utf8';
 $username = 'root';
-$password = '';
+$password = 'Lastofus2022SGF';
 
 try {
     $pdo = new PDO($dsn, $username, $password);

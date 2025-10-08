@@ -36,7 +36,7 @@
                 // Conexão com o banco de dados
                 $dsn = 'mysql:host=localhost;dbname=estacionamento;charset=utf8';
                 $username = 'root'; // Substitua pelo seu usuário
-                $password = ''; // Substitua pela sua senha
+                $password = 'Lastofus2022SGF'; // Substitua pela sua senha
 
                 try {
                     $pdo = new PDO($dsn, $username, $password);

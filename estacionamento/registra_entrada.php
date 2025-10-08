@@ -5,7 +5,7 @@ date_default_timezone_set('America/Sao_Paulo');
 // Conexão com o banco de dados
 $dsn = 'mysql:host=localhost;dbname=estacionamento;charset=utf8';
 $username = 'root'; // Altere para seu usuário
-$password = ''; // Altere para sua senha
+$password = 'Lastofus2022SGF'; // Altere para sua senha
 
 try {
     $pdo = new PDO($dsn, $username, $password);
@@ -30,8 +30,14 @@ try {
     
     $stmt2->execute(['placa' => $placa, 'hora_entrada' => $hora_entrada, 'valor_cobrado' => $valor_cobrado, 'observacoes' => $observacoes]);
 
-    echo "Entrada registrada com sucesso!";
-    echo "<br><a href='index.php'>Voltar</a>";
+    // Redireciona para a página de comprovante
+    session_start();
+    $_SESSION['placa'] = $placa;
+    $_SESSION['modelo'] = $modelo;
+    $_SESSION['observacoes'] = $observacoes;
+    header('Location: comprovante_entrada.php');
+    exit;
+
 } catch (PDOException $e) {
     echo "Erro na conexão: " . $e->getMessage();
 }

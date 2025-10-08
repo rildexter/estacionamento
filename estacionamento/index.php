@@ -25,41 +25,41 @@
             <textarea id="observacoes" name="observacoes" rows="2"></textarea>
             <button type="submit">Registrar Entrada</button>
         </form>
-<h2>Registrar Saída</h2>
-<form action="registra_saida.php" method="POST">
-    <label for="placa_saida">Placa:</label>
-    <select id="placa_saida" name="placa" required>
-        <option value="">Selecione uma placa</option>
-        <?php
-        // Conexão com o banco de dados
-        $dsn = 'mysql:host=localhost;dbname=estacionamento;charset=utf8';
-        $username = 'root'; // Substitua pelo seu usuário
-        $password = ''; // Substitua pela sua senha
 
-        try {
-            $pdo = new PDO($dsn, $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        <h2>Registrar Saída</h2>
+        <form action="registra_saida.php" method="POST">
+            <label for="placa_saida">Placa:</label>
+            <select id="placa_saida" name="placa" required>
+                <option value="">Selecione uma placa</option>
+                <?php
+                // Conexão com o banco de dados
+                $dsn = 'mysql:host=localhost;dbname=estacionamento;charset=utf8';
+                $username = 'root'; // Substitua pelo seu usuário
+                $password = 'Lastofus2022SGF'; // Substitua pela sua senha
 
-            // Selecionar placas que estão atualmente registradas e sem saída
-            $stmt = $pdo->query("SELECT Placa FROM Registro WHERE hora_saida IS NULL");
+                try {
+                    $pdo = new PDO($dsn, $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Verifica se há placas disponíveis
-            if ($stmt->rowCount() > 0) {
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<option value='{$row['Placa']}'>{$row['Placa']}</option>";
+                    // Selecionar placas que estão atualmente registradas e sem saída
+                    $stmt = $pdo->query("SELECT Placa FROM Registro WHERE hora_saida IS NULL");
+
+                    // Verifica se há placas disponíveis
+                    if ($stmt->rowCount() > 0) {
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<option value='{$row['Placa']}'>{$row['Placa']}</option>";
+                        }
+                    } else {
+                        echo "<option value=''>Nenhuma placa disponível</option>";
+                    }
+
+                } catch (PDOException $e) {
+                    echo "Erro na conexão: " . $e->getMessage();
                 }
-            } else {
-                echo "<option value=''>Nenhuma placa disponível</option>";
-            }
-
-        } catch (PDOException $e) {
-            echo "Erro na conexão: " . $e->getMessage();
-        }
-        ?>
-    </select>
-    <button type="submit">Registrar Saída</button>
-</form>
-
+                ?>
+            </select>
+            <button type="submit">Registrar Saída</button>
+        </form>
 
         <a href="relatorio.php" class="switch-btn nav-btn">Ir para Relatório</a>
     </div>
